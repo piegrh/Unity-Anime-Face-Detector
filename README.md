@@ -43,13 +43,13 @@ public class ScanSteamProfileImage : MonoBehaviour
         bool valid = SteamUtils.GetImageSize(imgId, out var width, out var height);
 
         if (valid == false)
-            return null;
+            return return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
         int pixels = (int)(width * height * 4);
         byte[] image = new byte[pixels];
 
         if (SteamUtils.GetImageRGBA(imgId, image, pixels) == false)
-            return null;
+            return return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
