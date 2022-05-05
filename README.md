@@ -1,4 +1,6 @@
 # Animefacedetector
+Detect anime faces in texture and images in Unity.  
+This Library is a port of [lbpcascade_animeface by nagadomi](https://github.com/nagadomi/lbpcascade_animeface) to [Emgu CV](https://www.emgu.com/wiki/index.php/Main_Page) (a OpenCV wrapper for .NET).
 
 ## Example together with Steamworks SDK
 If we detect an anime face in this user's steam profile image,
