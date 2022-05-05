@@ -4,8 +4,7 @@ This Library is a port of [lbpcascade_animeface by nagadomi](https://github.com/
   
  ![alt text](https://i.imgur.com/DSVgVOo.gif)  
 ## Example together with Steamworks SDK
-If we detect an anime face in this user's steam profile image,
-then quit the application.
+Quit the application if we detect an anime face in this user's steam profile image.
 
 ```c#
 public class ScanSteamProfileImage : MonoBehaviour
