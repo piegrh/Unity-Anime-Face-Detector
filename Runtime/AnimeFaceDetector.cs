@@ -8,27 +8,29 @@ using UnityEngine;
 using Emgu;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using UnityEditor;
+using Ulbe.Extensions;
+using UnityEngine;
 
 namespace Ulbe.Anime
 {
     public class AnimeFaceDetector : MonoBehaviour
     {
+        private static AnimeFaceDetector _instance;
+
         private string _lbpcascadePath = "";
 
         private const string XmlFileName = "lbpcascade_animeface.xml";
 
         public void Awake()
         {
-            if (_Instance != null)
+            if (_instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            _Instance = this;
+            _instance = this;
             name = GetType().Name;
-
             DontDestroyOnLoad(gameObject);
 
             try
@@ -39,7 +41,6 @@ namespace Ulbe.Anime
             {
                 Debug.LogError($"{e.Message}",gameObject);
                 Destroy(gameObject);
-                return;
             }
         }
 
@@ -54,23 +55,14 @@ namespace Ulbe.Anime
             if (File.Exists($"{_lbpcascadePath}"))
                 return;
 
-            // Find Cascade Classifier xml
-            string path = AssetDatabase
-                            .GetAllAssetPaths()
-                            .FirstOrDefault(p => p.EndsWith(XmlFileName));
-
-            if (string.IsNullOrEmpty(path))
-                throw new FileNotFoundException($"File not found: {XmlFileName}");
-
-            TextAsset xmlTextAsset = (TextAsset) AssetDatabase.LoadAssetAtPath(path, typeof(TextAsset));
+            TextAsset xmlTextAsset = Resources.Load<TextAsset>($"xml/{XmlFileName.Substring(0,XmlFileName.Length-4)}");
 
             if (xmlTextAsset is null)
-                throw new FileNotFoundException($"File not found: {path}");
+                throw new FileNotFoundException($"File not found: {XmlFileName}");
 
             // Save file to persistentDataPath
             Directory.CreateDirectory(xmlLocation);
             File.WriteAllText($"{_lbpcascadePath}", xmlTextAsset.text);
-
             IsInitialized = true;
         }
 
@@ -91,7 +83,7 @@ namespace Ulbe.Anime
         /// <param name="callback">Return <see langword="True"/> if an anime face is detected, otherwise return <see langword="False"/></param>
         public void IsAnimeImage(Texture2D texutre, Action<bool> callback)
         {
-            byte[] image = texutre.EncodeToPNG();
+            byte[] image = texutre.DeCompress().EncodeToPNG();
             string filename = $"{Guid.NewGuid()}.png";
             string path = SaveImageToPersistentDataPath(image, filename);
             StartCoroutine(_IsAnimeImage(path, $"{_lbpcascadePath}", (IsAnime) =>
@@ -128,6 +120,8 @@ namespace Ulbe.Anime
             yield break;
         }
 
+        public static AnimeFaceDetector Instance => _instance ?? new GameObject().AddComponent<AnimeFaceDetector>();
+
         private static string SaveImageToPersistentDataPath(byte[] image, string fileName)
         {
             string path = $"{Application.persistentDataPath}/images/{fileName}";
@@ -136,11 +130,6 @@ namespace Ulbe.Anime
             return path;
         }
 
-        public static AnimeFaceDetector Instance => _Instance ?? new GameObject().AddComponent<AnimeFaceDetector>();
-
         public bool IsInitialized { get; private set; }
-
-        protected static AnimeFaceDetector _Instance;
     }
 }
-
