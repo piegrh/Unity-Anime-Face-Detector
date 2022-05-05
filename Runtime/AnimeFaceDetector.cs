@@ -41,14 +41,6 @@ namespace Ulbe.Anime
                 Destroy(gameObject);
                 return;
             }
-
-            IsAnimeImage(@"C:/Users/ey/AppData/LocalLow/ulbe/LOEK/textures/weebs/test.jpg", (anime) =>
-            {
-                if (anime)
-                {
-                    Debug.Log("Fucking anime");
-                }
-            });
         }
 
         public void Init()
@@ -62,6 +54,7 @@ namespace Ulbe.Anime
             if (File.Exists($"{LbpcascadePath}"))
                 return;
 
+            // Find Cascade Classifier xml
             string path = AssetDatabase
                             .GetAllAssetPaths()
                             .FirstOrDefault(p => p.EndsWith(xmlFileName));
@@ -74,8 +67,10 @@ namespace Ulbe.Anime
             if (xmlTextAsset is null)
                 throw new FileNotFoundException($"File not found: {path}");
 
+            // Save file to persistentDataPath
             Directory.CreateDirectory(xmlLocation);
             File.WriteAllText($"{LbpcascadePath}", xmlTextAsset.text);
+
             IsInitialized = true;
         }
 
