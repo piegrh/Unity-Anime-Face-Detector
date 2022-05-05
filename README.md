@@ -30,7 +30,10 @@ public class ScanSteamProfileImage : MonoBehaviour
         Texture = GetSteamImageAsTexture(imageId);
 
         // Scan image for anime faces.
-        AnimeFaceDetector.Instance.IsAnimeImage(Texture, Callback);
+        AnimeFaceDetector.Instance.IsAnimeImage(Texture, (profileImageHasAnimeFace) => {
+          if (profileImageHasAnimeFace)
+            Application.Quit(); // Bye bye!
+        });
     }
 
     public Texture2D GetSteamImageAsTexture(int imgId)
@@ -52,16 +55,6 @@ public class ScanSteamProfileImage : MonoBehaviour
         texture = FlipTexture(texture);
 
         return texture;
-    }
-
-    private void Callback(bool value)
-    {
-        // Value is true if an anime face has been detected
-        // in this user's steam profile image.
-        if (value)
-        {
-            Application.Quit(); // Bye bye!
-        }
     }
 
     static Texture2D FlipTexture(Texture2D original)
