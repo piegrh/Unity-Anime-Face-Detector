@@ -53,9 +53,9 @@ public class ScanSteamProfileImage : MonoBehaviour
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
-        texture.Apply();
         texture = FlipTexture(texture);
-
+        texture.Apply();
+        
         return texture;
     }
 
@@ -74,7 +74,6 @@ public class ScanSteamProfileImage : MonoBehaviour
             }
         }
         
-        flipped.Apply();
         return flipped;
     }
 }
