@@ -1,9 +1,11 @@
 # Animefacedetector
 
 ## Example together with Steamworks SDK
+If we detect an anime face in this user's steam profile image,
+then quit the application.
 
 ```c#
-   public class ScanSteamProfileImage : MonoBehaviour
+public class ScanSteamProfileImage : MonoBehaviour
 {
     public Texture2D Texture;
 
