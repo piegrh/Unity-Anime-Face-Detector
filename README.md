@@ -43,17 +43,17 @@ public class ScanSteamProfileImage : MonoBehaviour
         bool valid = SteamUtils.GetImageSize(imgId, out var width, out var height);
 
         if (valid == false)
-            return return new Texture2D(1, 1, TextureFormat.ARGB32, false);
+            return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
         int pixels = (int)(width * height * 4);
         byte[] image = new byte[pixels];
 
         if (SteamUtils.GetImageRGBA(imgId, image, pixels) == false)
-            return return new Texture2D(1, 1, TextureFormat.ARGB32, false);
+            return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
-        texture = FlipTexture(texture);
+        texture = FlipTexture(texture); // SteamWorks.NET gives you an upside down image.
         texture.Apply();
         
         return texture;
@@ -62,18 +62,11 @@ public class ScanSteamProfileImage : MonoBehaviour
     static Texture2D FlipTexture(Texture2D original)
     {
         Texture2D flipped = new Texture2D(original.width, original.height);
-        
         int xN = original.width;
         int yN = original.height;
-        
         for (int i = 0; i < xN; i++)
-        {
-            for (int j = 0; j < yN; j++)
-            {
-                flipped.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
-            }
-        }
-        
+          for (int j = 0; j < yN; j++)
+            flipped.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
         return flipped;
     }
 }
