@@ -3,6 +3,8 @@
 ## Example together with Steamworks SDK
 
 ```c#
+   public class ScanSteamProfileImage : MonoBehaviour
+{
     public Texture2D Texture;
 
     public void Start()
@@ -13,14 +15,15 @@
     public IEnumerator CheckUserProfile()
     {
         int imageId = 0;
-
+        // Download profile image
         yield return new WaitWhile(() =>
         {
             imageId = SteamFriends.GetLargeFriendAvatar(SteamUser.GetSteamID());
             return imageId == 0 || imageId == -1;
         });
-
         Texture = GetSteamImageAsTexture(imageId);
+
+        // Scan image for anime faces.
         AnimeFaceDetector.Instance.IsAnimeImage(Texture, Callback);
     }
 
@@ -47,8 +50,12 @@
 
     public void Callback(bool value)
     {
+        // Value is true if an anime face has been detected
+        // in this user's steam profile image.
         if (value)
-            Application.Quit();
+        {
+            Application.Quit(); // Bye bye!
+        }
     }
 
     static Texture2D FlipTexture(Texture2D original)
@@ -66,4 +73,5 @@
         flipped.Apply();
         return flipped;
     }
+}
 ```
