@@ -50,7 +50,7 @@ public class ScanSteamProfileImage : MonoBehaviour
         return texture;
     }
 
-    public void Callback(bool value)
+    private void Callback(bool value)
     {
         // Value is true if an anime face has been detected
         // in this user's steam profile image.
