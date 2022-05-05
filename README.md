@@ -32,7 +32,7 @@ public class ScanSteamProfileImage : MonoBehaviour
         // Scan image for anime faces.
         AnimeFaceDetector.Instance.IsAnimeImage(Texture, (profileImageHasAnimeFace) => {
           if (profileImageHasAnimeFace)
-            Application.Quit(); // Bye bye!
+                Application.Quit(); // Bye bye!
         });
     }
 
