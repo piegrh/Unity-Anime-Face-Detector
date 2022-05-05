@@ -9,8 +9,6 @@ Quit the application if we detect an anime face in this user's steam profile ima
 ```c#
 public class ScanSteamProfileImage : MonoBehaviour
 {
-    public Texture2D Texture;
-
     public void Start()
     {
         StartCoroutine(CheckUserProfile());
@@ -27,7 +25,7 @@ public class ScanSteamProfileImage : MonoBehaviour
             return imageId == -1;
         }); 
         
-        Texture = GetSteamImageAsTexture(imageId);
+        Texture2D Texture = GetSteamImageAsTexture(imageId);
 
         // #############################################
         // ## Scan image for anime faces.             ##
