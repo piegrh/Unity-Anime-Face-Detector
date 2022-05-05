@@ -25,12 +25,12 @@ public class ScanSteamProfileImage : MonoBehaviour
             return imageId == -1;
         }); 
         
-        Texture2D Texture = GetSteamImageAsTexture(imageId);
+        Texture2D texture = GetSteamImageAsTexture(imageId);
 
         // #############################################
         // ## Scan image for anime faces.             ##
         // #############################################
-        AnimeFaceDetector.Instance.IsAnimeImage(Texture, (profileImageHasAnimeFace) => {
+        AnimeFaceDetector.Instance.IsAnimeImage(texture, (profileImageHasAnimeFace) => {
           if (profileImageHasAnimeFace)
                 Application.Quit(); // Bye bye!
         });
