@@ -1,6 +1,6 @@
 {
   "name": "com.ulbe.animefacedetector",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "displayName": "Anime Face Detector",
   "description": "Detect if there is at least one anime face in a picture.",
   "unity": "2018.3",
