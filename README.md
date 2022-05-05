@@ -24,7 +24,7 @@ public class ScanSteamProfileImage : MonoBehaviour
         yield return new WaitWhile(() =>
         {
             imageId = SteamFriends.GetLargeFriendAvatar(SteamUser.GetSteamID());
-            return imageId == 0 || imageId == -1;
+            return imageId == -1;
         }); 
         
         Texture = GetSteamImageAsTexture(imageId);
