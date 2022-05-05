@@ -1,6 +1,6 @@
 # Unity Anime face detector
 Detect anime faces in texture and images in Unity.  
-This Library is basically a port of [lbpcascade_animeface by nagadomi](https://github.com/nagadomi/lbpcascade_animeface) to [Emgu CV](https://www.emgu.com/wiki/index.php/Main_Page) (an OpenCV wrapper for .NET).  Also some unity integration stuff.
+This Library is basically a port of [lbpcascade_animeface by nagadomi](https://github.com/nagadomi/lbpcascade_animeface) to C# using [Emgu CV](https://www.emgu.com/wiki/index.php/Main_Page) (an OpenCV wrapper).  Also some unity integration stuff.
   
  ![alt text](https://i.imgur.com/DSVgVOo.gif)  
 ## Example together with Steamworks.NET
