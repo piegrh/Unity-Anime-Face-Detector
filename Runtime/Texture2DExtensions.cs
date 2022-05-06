@@ -33,13 +33,12 @@ namespace Ulbe.Extensions
         /// <returns></returns>
         public static Texture2D FlipY(this Texture2D original)
         {
-            Texture2D flipped = new Texture2D(original.width, original.height);
             int xN = original.width;
             int yN = original.height;
             for (int i = 0; i < xN; i++)
                 for (int j = 0; j < yN; j++)
-                    flipped.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
-            return flipped;
+                    original.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
+            return original;
         }
     }
 }
