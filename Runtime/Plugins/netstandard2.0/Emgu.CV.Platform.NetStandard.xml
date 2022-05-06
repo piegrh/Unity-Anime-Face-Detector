@@ -1728,7 +1728,7 @@
             <param name="idx1">The second zero-based component of the element index</param>
             <param name="value">The assigned value</param>
         </member>
-        <member name="M:Emgu.CV.CvInvoke.Flip(Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.CvEnum.FlipType)">
+        <member name="M:Emgu.CV.CvInvoke.FlipY(Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.CvEnum.FlipType)">
             <summary>
             Flips the array in one of different 3 ways (row and column indices are 0-based)
             </summary>
@@ -6599,7 +6599,7 @@
             <param name="minLocations">The minimum locations for each channel</param>
             <param name="minValues">The minimum values for each channel</param>
         </member>
-        <member name="M:Emgu.CV.Image`2.Flip(Emgu.CV.CvEnum.FlipType)">
+        <member name="M:Emgu.CV.Image`2.FlipY(Emgu.CV.CvEnum.FlipType)">
             <summary> Return a flipped copy of the current image</summary>
             <param name="flipType">The type of the flipping</param>
             <returns> The flipped copy of <i>this</i> image </returns>
@@ -23430,7 +23430,7 @@
             <param name="kernel">The values for the convolution kernel</param>
             <param name="center">The center for the convolution kernel</param>
         </member>
-        <member name="M:Emgu.CV.ConvolutionKernelF.Flip(Emgu.CV.CvEnum.FlipType)">
+        <member name="M:Emgu.CV.ConvolutionKernelF.FlipY(Emgu.CV.CvEnum.FlipType)">
             <summary> Get a flipped copy of the convolution kernel</summary>
             <param name="flipType">The type of the flipping</param>
             <returns> The flipped copy of <i>this</i> kernel </returns>
@@ -27859,12 +27859,12 @@
         </member>
         <member name="F:Emgu.CV.CvEnum.FlipType.Horizontal">
             <summary>
-            Flip horizontally
+            FlipY horizontally
             </summary>
         </member>
         <member name="F:Emgu.CV.CvEnum.FlipType.Both">
             <summary>
-            Flip both vertically and horizontally
+            FlipY both vertically and horizontally
             </summary>
         </member>
         <member name="T:Emgu.CV.CvEnum.FloodFillType">
@@ -30463,7 +30463,7 @@
             <param name="borderValue">Value used in case of a constant border. By default, it is 0.</param>
             <returns>The transformed image.</returns>
         </member>
-        <member name="M:Emgu.CV.GapiInvoke.Flip(Emgu.CV.GMat,Emgu.CV.CvEnum.FlipType)">
+        <member name="M:Emgu.CV.GapiInvoke.FlipY(Emgu.CV.GMat,Emgu.CV.CvEnum.FlipType)">
             <summary>
             Flips a 2D matrix around vertical, horizontal, or both axes.
             </summary>
@@ -31947,7 +31947,7 @@
             <param name="stream">Use a Stream to call the function asynchronously (non-blocking) or null to call the function synchronously (blocking).</param>      
             <param name="dType">Optional depth of the output array.</param>
         </member>
-        <member name="M:Emgu.CV.Cuda.CudaInvoke.Flip(Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.CvEnum.FlipType,Emgu.CV.Cuda.Stream)">
+        <member name="M:Emgu.CV.Cuda.CudaInvoke.FlipY(Emgu.CV.IInputArray,Emgu.CV.IOutputArray,Emgu.CV.CvEnum.FlipType,Emgu.CV.Cuda.Stream)">
             <summary>
             Flips the GpuMat&lt;Byte&gt; in one of different 3 ways (row and column indices are 0-based). 
             </summary>
