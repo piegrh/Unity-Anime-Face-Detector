@@ -46,7 +46,7 @@ public class ScanSteamProfileImage : MonoBehaviour
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
-        texture = texture.FlipY(); // SteamWorks.NET gives you an upside down image.
+        texture.FlipY(); // SteamWorks.NET gives you an upside down image.
         texture.Apply();
         
         return texture;
