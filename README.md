@@ -9,36 +9,29 @@ Quit the application if we detect an anime face in this user's steam profile ima
 ```c#
 public class ScanSteamProfileImage : MonoBehaviour
 {
-    public Texture2D Texture;
-
     public void Start()
     {
-        StartCoroutine(CheckUserProfile());
+        StartCoroutine(CheckSteamUserProfileAvatar());
     }
 
-    public IEnumerator CheckUserProfile()
+    public IEnumerator CheckSteamUserProfileAvatar()
     {
-        int imageId = 0;
-        
         // Download profile image
+        int imageId = 0;
         yield return new WaitWhile(() =>
         {
             imageId = SteamFriends.GetLargeFriendAvatar(SteamUser.GetSteamID());
             return imageId == -1;
         }); 
         
-        Texture = GetSteamImageAsTexture(imageId);
-
-        // #############################################
-        // ## Scan image for anime faces.             ##
-        // #############################################
-        AnimeFaceDetector.Instance.IsAnimeImage(Texture, (profileImageHasAnimeFace) => {
+        // Check texture
+        AnimeFaceDetector.Instance.IsAnimeImage(GetSteamImageAsTexture(imageId), (profileImageHasAnimeFace) => {
           if (profileImageHasAnimeFace)
                 Application.Quit(); // Bye bye!
         });
     }
 
-    public Texture2D GetSteamImageAsTexture(int imgId)
+    public static Texture2D GetSteamImageAsTexture(int imgId)
     {
         bool valid = SteamUtils.GetImageSize(imgId, out var width, out var height);
 
@@ -53,21 +46,10 @@ public class ScanSteamProfileImage : MonoBehaviour
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
-        texture = FlipTexture(texture); // SteamWorks.NET gives you an upside down image.
+        texture = texture.FlipY(); // SteamWorks.NET gives you an upside down image.
         texture.Apply();
         
         return texture;
-    }
-
-    static Texture2D FlipTexture(Texture2D original)
-    {
-        Texture2D flipped = new Texture2D(original.width, original.height);
-        int xN = original.width;
-        int yN = original.height;
-        for (int i = 0; i < xN; i++)
-          for (int j = 0; j < yN; j++)
-            flipped.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
-        return flipped;
     }
 }
 ```
