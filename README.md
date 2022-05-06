@@ -11,10 +11,10 @@ public class ScanSteamProfileImage : MonoBehaviour
 {
     public void Start()
     {
-        StartCoroutine(CheckUserProfile());
+        StartCoroutine(CheckSteamUserProfileAvatar());
     }
 
-    public IEnumerator CheckUserProfile()
+    public IEnumerator CheckSteamUserProfileAvatar()
     {
         // Download profile image
         int imageId = 0;
@@ -31,7 +31,7 @@ public class ScanSteamProfileImage : MonoBehaviour
         });
     }
 
-    public Texture2D GetSteamImageAsTexture(int imgId)
+    public static Texture2D GetSteamImageAsTexture(int imgId)
     {
         bool valid = SteamUtils.GetImageSize(imgId, out var width, out var height);
 
