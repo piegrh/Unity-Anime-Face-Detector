@@ -16,21 +16,16 @@ public class ScanSteamProfileImage : MonoBehaviour
 
     public IEnumerator CheckUserProfile()
     {
-        int imageId = 0;
-        
         // Download profile image
+        int imageId = 0;
         yield return new WaitWhile(() =>
         {
             imageId = SteamFriends.GetLargeFriendAvatar(SteamUser.GetSteamID());
             return imageId == -1;
         }); 
         
-        Texture2D texture = GetSteamImageAsTexture(imageId);
-
-        // #############################################
-        // ## Scan image for anime faces.             ##
-        // #############################################
-        AnimeFaceDetector.Instance.IsAnimeImage(texture, (profileImageHasAnimeFace) => {
+        // Check texture
+        AnimeFaceDetector.Instance.IsAnimeImage(GetSteamImageAsTexture(imageId), (profileImageHasAnimeFace) => {
           if (profileImageHasAnimeFace)
                 Application.Quit(); // Bye bye!
         });
@@ -51,21 +46,10 @@ public class ScanSteamProfileImage : MonoBehaviour
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
         texture.LoadRawTextureData(image);
-        texture = FlipTexture(texture); // SteamWorks.NET gives you an upside down image.
+        texture = texture.FlipY(); // SteamWorks.NET gives you an upside down image.
         texture.Apply();
         
         return texture;
-    }
-
-    static Texture2D FlipTexture(Texture2D original)
-    {
-        Texture2D flipped = new Texture2D(original.width, original.height);
-        int xN = original.width;
-        int yN = original.height;
-        for (int i = 0; i < xN; i++)
-          for (int j = 0; j < yN; j++)
-            flipped.SetPixel(i, yN - j - 1, original.GetPixel(i, j));
-        return flipped;
     }
 }
 ```
