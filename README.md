@@ -38,10 +38,10 @@ public class ScanSteamProfileImage : MonoBehaviour
         if (valid == false)
             return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
-        int pixels = (int)(width * height * 4);
-        byte[] image = new byte[pixels];
+        int size = (int)(width * height * 4);
+        byte[] image = new byte[size];
 
-        if (SteamUtils.GetImageRGBA(imgId, image, pixels) == false)
+        if (SteamUtils.GetImageRGBA(imgId, image, size) == false)
             return new Texture2D(1, 1, TextureFormat.ARGB32, false);
 
         Texture2D texture = new Texture2D((int)width, (int)height, TextureFormat.RGBA32, false, true);
