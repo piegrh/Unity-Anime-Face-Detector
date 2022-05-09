@@ -24,8 +24,9 @@ public class ScanSteamProfileImage : MonoBehaviour
             return imageId == -1;
         }); 
         
-        // Check texture
-        AnimeFaceDetector.Instance.IsAnimeImage(GetSteamImageAsTexture(imageId), (profileImageHasAnimeFace) => {
+        // Check image
+        Texture2D texture = GetSteamImageAsTexture(imageId);
+        AnimeFaceDetector.Instance.IsAnimeImage(texture, (profileImageHasAnimeFace) => {
           if (profileImageHasAnimeFace)
                 Application.Quit(); // Bye bye!
         });
