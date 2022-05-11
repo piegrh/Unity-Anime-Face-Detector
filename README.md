@@ -5,7 +5,6 @@ This Library is basically a port of [lbpcascade_animeface by nagadomi](https://g
  ![alt text](https://i.imgur.com/DSVgVOo.gif)  
 ## Example together with Steamworks.NET
 Quit the application if we detect an anime face in this user's steam profile image.
-
 ```c#
 public class ScanSteamProfileImage : MonoBehaviour
 {
@@ -54,3 +53,4 @@ public class ScanSteamProfileImage : MonoBehaviour
     }
 }
 ```
+![alt text](https://i.imgur.com/McMJsyR.jpg)  
