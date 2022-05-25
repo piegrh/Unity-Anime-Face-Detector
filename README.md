@@ -3,7 +3,7 @@ Detect anime faces in texture and images in Unity.
 This Library is basically a port of [lbpcascade_animeface by nagadomi](https://github.com/nagadomi/lbpcascade_animeface) to C# using [Emgu CV](https://www.emgu.com/wiki/index.php/Main_Page) (an OpenCV wrapper).  Also some unity integration stuff.
   
  ![alt text](https://i.imgur.com/DSVgVOo.gif)  
-## Example together with Steamworks.NET
+## Example together with  [Steamworks.NET](https://github.com/rlabrecque/Steamworks.NET)
 Quit the application if we detect an anime face in this user's steam profile image.
 ```c#
 public class ScanSteamProfileImage : MonoBehaviour
